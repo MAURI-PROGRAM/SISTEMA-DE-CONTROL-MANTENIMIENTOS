@@ -1,0 +1,69 @@
+{%extends 'admin/base_site.html'%}
+{%block header%}
+	
+{%endblock%}
+{% block extrastyle %}{{ block.super }}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{%block content%}
+
+<div class="container">
+	<h4>INDICADORES DE EQUIPOS GENERADORES DE LUZ ELECTRICA</h4>
+	<br>
+<table id="tables" class="table">
+	<thead>
+		<tr>
+			<td>CODIGO DE EQUIPO</td>
+			<td>NUMERO DE FALLOS</td>
+			<td>TIEMPO DE REPARACION</td>
+			<td>TIEMPO TOTAL</td>
+			<td>DISPONIBILIDAD</td>
+			<td>FIABILIDAD</td>
+			<td>MANTENIBILIDAD</td>
+		</tr>
+	</thead>
+	<tbody>
+		
+			{%if equipos%}
+			{%for equipo in equipos%}
+			{%if equipo.DISPONIBILIDAD >= 99 %}
+			<tr class="success">
+			{%elif equipo.DISPONIBILIDAD >= 95 and equipo.DISPONIBILIDAD < 99 %}
+			<tr class="warning">
+			{%elif equipo.DISPONIBILIDAD < 95 %}
+			<tr class="danger">
+			{%endif%}
+			
+			<td>{{equipo.codigo}}</td>
+			<td>{{equipo.numero}}</td>
+			<td>{{equipo.TIEMPO_FALLO}} H  </td>
+			<td>{{equipo.TIEMPO_TOTAL}} H  </td>
+			<td>{{equipo.DISPONIBILIDAD}} %</td>
+			<td>{{equipo.FIABILIDAD}} H  </td>
+			<td>{{equipo.MANTENIBILIDAD}} H</td>
+			</tr>
+
+			{%endfor%}
+			{%else%}
+			<h1>NO HAY REGISTROS</h1>
+			{%endif%}
+		
+	</tbody>
+</table>
+</div>
+<script>
+ $(document).ready(function () {
+        $('#tables').DataTable();
+    });
+</script>
+
+
+{%endblock%}
