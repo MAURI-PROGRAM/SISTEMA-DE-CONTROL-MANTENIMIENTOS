@@ -134,3 +134,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "SISTEMA/templates/static"),
 ]
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'proyecto.titulacion.mant@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'proyecto19'
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
