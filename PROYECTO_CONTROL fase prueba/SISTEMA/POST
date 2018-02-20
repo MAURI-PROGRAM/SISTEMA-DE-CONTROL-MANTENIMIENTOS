@@ -1,0 +1,81 @@
+
+{%extends 'admin/base_site.html'%}
+{%block header%}
+  
+{%endblock%}
+{% block extrastyle %}{{ block.super }}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{%block content%}
+<form id="fcontact"  method="POST" action="contacto.html">
+            
+              {% csrf_token %}
+              <select name="items['a']">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+              <select name="items['b']">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+              <select name="items['c']">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+              <select name="items[]">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+               <button id='submit' type="submit" class="btn btn-primary">Send comment!</button>
+    </form>
+
+{%endblock%}
+
+path('contacto.html', views.contact, name='cont'),
+def contact(request):
+    context={}
+    if request.method=='POST':
+        estado=False
+        list1 = request.POST.getlist('items')
+        estado=True
+        context={"estado":estado,'a1':list1}
+        return render(request,'mant/printdf.html',context)
+        
+  
+ {%extends 'admin/base_site.html'%}
+{%block header%}
+  
+{%endblock%}
+{% block extrastyle %}{{ block.super }}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{%block content%}
+  HOLA COMO ESTAS
+  {%for a1 in a1%}
+  {{a1.c}}
+  {%endfor%}
+{%endblock%}
