@@ -1,0 +1,60 @@
+{%extends 'admin/base_site.html'%}
+{%block header%}
+	
+{%endblock%}
+{% block extrastyle %}{{ block.super }}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{%block content%}
+<div class="container">
+	<h4>DISTRIBUIR TRABAJOS DE MANTENIMIENTOS</h4>
+	<br>
+
+<table id="tables" class="table">
+	<thead>
+		<tr>
+			<td>CODIGO</td>
+			<td>NOMBRE DEL EQUIPO</td>
+			<td>CODIGO DEL EQUIPO</td>
+			<td>FECHA DE MANTENIMIENTO</td>
+			<td>ASIGNAR A:</td>
+		</tr>
+	</thead>
+	<form id="enviar"  method="POST" action="envios.html">
+{% csrf_token %}
+	<tbody>
+			{%if mantenimientos%}
+			{%for mantenimiento in mantenimientos%}
+			<tr>
+			<td>{{mantenimiento.codigo}}</td>
+			<td>{{mantenimiento.nombre}}</td>
+			<td>{{mantenimiento.codequi}}</td>
+			<td>{{mantenimiento.fecha}}</td>
+			<td><select name="select">
+					{%for empleado in empleados%}
+  					<option value="{{mantenimiento.codigo}},{{empleado.email_emp}}" selected>{{empleado.name_emp}} </option>
+					{%endfor%}
+				</select>
+			</td>
+			</tr>
+
+			{%endfor%}
+			{%else%}
+			<h1>NO HAY REGISTROS</h1>
+			{%endif%}
+		
+	</tbody>
+	<button id='submit' type="submit" class="btn btn-primary">ENVIAR CORREOS</button>
+	 </form>
+</table>
+</div>
+
+{%endblock%}

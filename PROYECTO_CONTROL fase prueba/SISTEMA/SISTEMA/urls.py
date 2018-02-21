@@ -20,4 +20,4 @@ urlpatterns = [
 	path('control/', include('control.urls')),
     path('admin/', admin.site.urls),
 ]
-admin.site.site_header = 'REGISTRO DE MANTENIMIENTOS GENEROCA'
+admin.site.site_header = 'REGISTRO DE MANTENIMIENTOS'
