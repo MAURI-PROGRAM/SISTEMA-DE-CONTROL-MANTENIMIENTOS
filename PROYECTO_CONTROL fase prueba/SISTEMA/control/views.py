@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Registro_mantenimiento,Mantenimiento_Pieza,Empleados
 from django.db import connection
 from django.core.mail import send_mass_mail
+import logging
 
 
 def index(request):
@@ -10,10 +11,14 @@ def index(request):
 
 def envios(request):
     if request.method=='POST':
-        ms1='<p>This is an <strong>important</strong> message.</p>'
-        message1 = ('MANTENIMIENTOS POR REALIZAR EL DIA DE HOY', 'PRIMER AVISO', '', ['merchan.ber.mau@gmail.com'])
-        message2 = ('MANTENIMIENTOS POR REALIZAR EL DIA DE HOY', 'SEGUNDO AVISO', '', ['merchan.ber.mau@gmail.com'])
-        send_mass_mail((message1, message2),fail_silently=False)
+        correos=[]
+        selects=request.POST.getlist('select[]')
+        for sel in selects:
+            new=[]
+            new=sel.split(",")
+            add_tuple=('MANTENIMIENTOS POR REALIZAR EL DIA DE HOY', str(new[0]), '', [str(new[1])])
+            correos.append(add_tuple)
+        send_mass_mail(tuple(correos),fail_silently=False)
         return render(request,'mant/enviar.html')
 
 def mantenimientos_urg(request):
