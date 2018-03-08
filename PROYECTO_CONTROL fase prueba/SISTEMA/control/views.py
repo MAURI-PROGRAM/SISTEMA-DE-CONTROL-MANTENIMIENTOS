@@ -16,7 +16,7 @@ def envios(request):
         for sel in selects:
             new=[]
             new=sel.split(",")
-            add_tuple=('MANTENIMIENTOS POR REALIZAR EL DIA DE HOY', str(new[0]), '', [str(new[1])])
+            add_tuple=('MANTENIMIENTOS POR REALIZAR EL DIA DE HOY', "http://localhost:8000/admin/control/mantenimiento_pieza/"+str(new[0])+"/change/", '', [str(new[1])])
             correos.append(add_tuple)
         send_mass_mail(tuple(correos),fail_silently=False)
         return render(request,'mant/enviar.html')

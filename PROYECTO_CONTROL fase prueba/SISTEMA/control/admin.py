@@ -44,7 +44,7 @@ class MantenimientoAdmin(admin.ModelAdmin):
     list_display = ['codigo_mant','nombre_mant','actividad_mant','padre_mant',]
     search_fields = ['codigo_mant']
     list_per_page=10
-    list_filter=('actividad_mant','padre_mant',)
+    list_filter=('padre_mant',)
 
 class Mantenimiento_Pieza_Admin(admin.ModelAdmin):
     model=Mantenimiento
@@ -57,6 +57,7 @@ class Mantenimiento_Pieza_Admin(admin.ModelAdmin):
     Mantenimiento_PiezaInline.can_delete=False
     list_display = ['pieza_mt','mantenimiento_mt','codigo_mantpiz']
     search_fields = ['codigo_mantpiz']
+    list_filter=('mantenimiento_mt',)
     list_per_page=10
 
 
@@ -69,7 +70,6 @@ class Registro_mantenimientoAdmin(admin.ModelAdmin):
     ]
     # inlines = [Mantenimiento_PiezaInline]
     list_display = ('pieza_mantenimiento','fech_ini_rmt','duracion','FECHA_PROXIMO')
-    search_fields = ['pieza_mantenimiento']
     list_filter=('fech_ini_rmt',)
     list_per_page=10
 

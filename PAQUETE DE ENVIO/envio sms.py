@@ -47,7 +47,7 @@ fecha_actual=datetime.now()
 
 fromaddr = 'proyecto.titulacion.mant@gmail.com'
 #,'daniponce1995@gmail.com','luzkristy@gmail.com','merchan.ber.mau@hotmail.com'
-toaddr = ('merchan.ber.mau@gmail.com',)
+toaddr = ('merchan.ber.mau@gmail.com','daniponce1995@gmail.com')
 
 mail_msg = """
 <h2>TAREAS ASIGNADAS PARA EL """+fecha_actual.strftime("%d/%m/%y")+"""</h2>

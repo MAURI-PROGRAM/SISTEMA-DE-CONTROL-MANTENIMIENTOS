@@ -40,7 +40,7 @@
 			<td>{{mantenimiento.fecha}}</td>
 			<td><select name="select[]">
 					{%for empleado in empleados%}
-  					<option value="{{mantenimiento.codigo}},{{empleado.email_emp}}" selected>{{empleado.name_emp}} </option>
+  					<option value="{{mantenimiento.idp}},{{empleado.email_emp}}" selected>{{empleado.name_emp}} </option>
 					{%endfor%}
 				</select>
 			</td>
